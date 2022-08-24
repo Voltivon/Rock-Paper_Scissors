@@ -1,0 +1,36 @@
+body{
+    background-image: linear-gradient(rgb(197, 150, 48), rgb(22, 21, 20));
+    height: 100vh;
+    width: 100vw;
+}
+
+.container { 
+   text-align: center; 
+   margin-top: 15rem;
+}
+
+button{
+    padding: 20px;
+    margin: 30px;
+    border-radius: 10px;
+}
+
+button:hover{
+    background-color: red;
+    color: black;
+    
+}
+
+.header__container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1{
+    font-size: 50px;
+}
+
+

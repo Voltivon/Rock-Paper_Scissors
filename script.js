@@ -1,93 +1,51 @@
-let computerScore = 0;
-let playerScore = 0;
-let userInput = prompt();
+const playerText = document.querySelector("#playerText");
+const computerText = document.querySelector("#computerText");
+const resultText = document.querySelector("#result");
+const buttons = document.querySelectorAll(".choice-Btn");
+const scoreText = document.querySelector("#score");
 
-function getComputerChoice() {
-  const randomNum = Math.floor(Math.random() * 3);
-  if (randomNum === 0) {
-    return "rock";
-  } else if (randomNum === 1) {
-    return "paper";
-  } else if (randomNum === 2) {
-    return "scissors";
-  }
-  return randomNum;
-}
+let player;
+let computer;
+let result;
+let score = 0;
 
-const getComputerAnswer = getComputerChoice();
+buttons.forEach((button) =>
+  button.addEventListener("click", () => {
+    player = button.textContent;
+    computerTurn();
+    playerText.textContent = `Player: ${player}`;
+    computerText.textContent = `Computer: ${computer}`;
+    resultText.textContent = checkWinner();
+    if (resultText.textContent == "You Win!") {
+      scoreText.textContent = `Score: ${score++}`;
+    }
+  })
+);
 
-function playGround(playerSelection, computerSelection) {
-  const playerSelectionLowCase = playerSelection.toLowerCase();
+function computerTurn() {
+  const randNum = Math.floor(Math.random() * 3) + 1;
 
-  if (playerSelectionLowCase === "rock" && computerSelection === "scissors") {
-    console.log(
-      `You Win with a score of ${++playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "rock" &&
-    computerSelection === "paper"
-  ) {
-    console.log(
-      `You Lose with a score of ${playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "rock" &&
-    computerSelection === "rock"
-  ) {
-    console.log(
-      `You Tied with a score of ${playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "paper" &&
-    computerSelection === "scissors"
-  ) {
-    console.log(
-      `You Lose with a score of ${playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "paper" &&
-    computerSelection === "rock"
-  ) {
-    console.log(
-      `You Win with a score of ${++playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "paper" &&
-    computerSelection === "paper"
-  ) {
-    console.log(
-      `You Tied with a score of ${playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "scissors" &&
-    computerSelection === "paper"
-  ) {
-    console.log(
-      `You Win with a score of ${++playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "scissors" &&
-    computerSelection === "rock"
-  ) {
-    console.log(
-      `You Lose with a score of ${playerScore} and you chose ${userInput}`
-    );
-  } else if (
-    playerSelectionLowCase === "scissors" &&
-    computerSelection === "scissors"
-  ) {
-    console.log(
-      `You Tied with a score of ${playerScore} and you chose ${userInput}`
-    );
-  }
-
-  while (playerScore !== 5) {
-    prompt();
-    playGround(userInput, getComputerAnswer);
+  switch (randNum) {
+    case 1:
+      computer = "ROCK";
+      break;
+    case 2:
+      computer = "PAPER";
+      break;
+    case 3:
+      computer = "SCISSORS";
+      break;
   }
 }
 
-// console.log(game())
-console.log(playGround(userInput, getComputerAnswer));
-
-// console.log(getComputerChoice())
+function checkWinner() {
+  if (player == computer) {
+    return "Draw!";
+  } else if (computer == "ROCK") {
+    return player == "PAPER" ? "You Win!" : "You Lose!";
+  } else if (computer == "PAPER") {
+    return player == "SCISSORS" ? "You Win!" : "You Lose!";
+  } else if (computer == "SCISSORS") {
+    return player == "ROCK" ? "You Win!" : "You Lose!";
+  }
+}
